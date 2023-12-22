@@ -1,5 +1,8 @@
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 
-moduule.eexports = {
+module.exports = {
+    mode: 'development',
+    entry: "./src/index.js",
     module: {
         rules: [
             {
@@ -8,7 +11,25 @@ moduule.eexports = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.html$/i,
+                use: [
+                    {
+                        loader: 'html-loader'
+                    }
+                ]
             }
         ]
-    }
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '.scss', '.json']
+    },
+    plugins: [
+        new HTMLWebpackPlugin({
+            template: './src/index.html',
+            filename: './index.html'
+        })
+    ],
+    devtool: 'inline-source-map'
 }
