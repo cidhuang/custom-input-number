@@ -1,0 +1,49 @@
+  .flex {
+      display: inline-flex;
+      flex-direction: row;
+      border-style: dashed;
+      border-width: 2px;
+      border-color: silver;
+      padding: 4px;
+  }
+
+  .item {
+      flex: 1;
+      width: 48px;
+      height: 48px;
+      margin: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 5px;
+  }
+
+  .content {
+      @extend .item;
+      border-color: DarkGrey;
+      color: Grey;
+      font-size: 16px;
+      text-align: center;
+  }
+
+  .btn {
+      @extend .item;
+      border-color: #87CEEB;
+      font-size: 48px;
+      color: #87CEEB;
+      font-family: "Courier New"
+  }
+
+  /* Works for Chrome, Safari, Edge, Opera */
+  .content::-webkit-outer-spin-button,
+  .content::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+
+  /* Works for Firefox */
+  .content[type="number"] {
+      -moz-appearance: textfield;
+  }
