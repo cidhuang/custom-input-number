@@ -47,3 +47,7 @@
   .content[type="number"] {
       -moz-appearance: textfield;
   }
+
+  .item:disabled {
+    background: silver;
+  }
