@@ -9,8 +9,8 @@
 
   .item {
       flex: 1;
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       margin: 4px;
       display: flex;
       justify-content: center;
@@ -26,6 +26,7 @@
       color: Grey;
       font-size: 16px;
       text-align: center;
+      padding: 0px;
   }
 
   .btn {
@@ -33,7 +34,13 @@
       border-color: #87CEEB;
       font-size: 48px;
       color: #87CEEB;
-      font-family: "Courier New"
+      font-family: "Courier New";
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
   }
 
   /* Works for Chrome, Safari, Edge, Opera */

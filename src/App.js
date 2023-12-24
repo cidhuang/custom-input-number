@@ -6,7 +6,7 @@ const App = () => {
     const [value, setValue] = useState(3);
 
     function onChangeCIN(e) {
-        console.log("onChangedCIN a", e.target.value, e.target.name);
+        console.log("onChangedCIN a", e.target.value, e.target.name, e);
     }
 
     function onBlurCIN(e) {
@@ -14,7 +14,7 @@ const App = () => {
     }
 
     function onChangeTest(e) {
-        console.log("onChangeTest a", e.target.value, e.target.name);
+        console.log("onChangeTest a", e.target.value, e.target.name, e);
     }
 
     function onBlurTest(e) {
