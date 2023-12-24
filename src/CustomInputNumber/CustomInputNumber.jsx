@@ -9,6 +9,8 @@ const CustomInputNumber = (props) => {
     const [value, setValue] = useState(props.value);
     const [mouseDownMinus, setMouseDownMinus] = useState(false);
     const [mouseDownPlus, setMouseDownPlus] = useState(false);
+    const timeoutIdMinus = useRef(null);
+    const timeoutIdPlus = useRef(null);
 
     function onKeyUp(e) {
         switch (e.code) {
@@ -43,36 +45,61 @@ const CustomInputNumber = (props) => {
         props.onBlur(e);
     }
 
-    function onMouseDownMinus(e) {
+    function down() {
         let r = setDown(props.name);
         if (r !== null) {
             props.onChange({ target: { name: props.name, value: r } });
             setValue(r);
         }
-        setMouseDownMinus(true);
     }
 
-    function onMouseDownPlus(e) {
+    function up() {
         let r = setUp(props.name);
         if (r !== null) {
             props.onChange({ target: { name: props.name, value: r } });
             setValue(r);
         }
-        setMouseDownPlus(true);
     }
 
-    function onClickMinus(e) {
+    function onTimeOutMinus() {
+        timeoutIdMinus.current = window.setTimeout(onTimeOutMinus, 50);
+        down();
+    }
+
+    function onTimeOutPlus() {
+        timeoutIdPlus.current = window.setTimeout(onTimeOutPlus, 50);
+        up();
+    }
+
+    function onMouseUpMinus(e) {
         setMouseDownMinus(false);
+        window.clearTimeout(timeoutIdMinus.current);
+        window.removeEventListener('mouseup', onMouseUpMinus, true);
     }
 
-    function onClickPlus(e) {
+    function onMouseUpPlus(e) {
         setMouseDownPlus(false);
+        window.clearTimeout(timeoutIdPlus.current);
+        window.removeEventListener('mouseup', onMouseUpPlus, true);
+    }
+
+    function onMouseDownMinus(e) {
+        window.addEventListener('mouseup', onMouseUpMinus, true)
+        timeoutIdMinus.current = window.setTimeout(onTimeOutMinus, 500);
+        down();
+        setMouseDownMinus(true);
+    }
+
+    function onMouseDownPlus(e) {
+        window.addEventListener('mouseup', onMouseUpPlus, true)
+        timeoutIdPlus.current = window.setTimeout(onTimeOutPlus, 500);
+        up();
+        setMouseDownPlus(true);
     }
 
     return (
         <div className="flex" >
             <div className="btn"
-                onClick={e => onClickMinus(e)}
                 onMouseDown={e => onMouseDownMinus(e)}
             >
                 -
@@ -89,7 +116,6 @@ const CustomInputNumber = (props) => {
                 onKeyUp={e => onKeyUp(e)}
             />
             <div className="btn"
-                onClick={e => onClickPlus(e)}
                 onMouseDown={e => onMouseDownPlus(e)}
             >
                 +
