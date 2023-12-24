@@ -1,9 +1,6 @@
   .flex {
       display: inline-flex;
       flex-direction: row;
-      border-style: dashed;
-      border-width: 2px;
-      border-color: silver;
       padding: 4px;
   }
 
@@ -53,8 +50,4 @@
   /* Works for Firefox */
   .content[type="number"] {
       -moz-appearance: textfield;
-  }
-
-  .item:disabled {
-    background: silver;
   }

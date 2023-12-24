@@ -84,6 +84,9 @@ const CustomInputNumber = (props) => {
     }
 
     function onMouseDownMinus(e) {
+        if(props.disabled) {
+            return;
+        }
         window.addEventListener('mouseup', onMouseUpMinus, true)
         timeoutIdMinus.current = window.setTimeout(onTimeOutMinus, 500);
         down();
@@ -91,6 +94,9 @@ const CustomInputNumber = (props) => {
     }
 
     function onMouseDownPlus(e) {
+        if(props.disabled) {
+            return;
+        }
         window.addEventListener('mouseup', onMouseUpPlus, true)
         timeoutIdPlus.current = window.setTimeout(onTimeOutPlus, 500);
         up();
@@ -98,7 +104,7 @@ const CustomInputNumber = (props) => {
     }
 
     return (
-        <div className="flex" >
+        <div className="flex" style={{background: props.disabled ? '#dddddd' : 'white'}}>
             <div className="btn"
                 onMouseDown={e => onMouseDownMinus(e)}
             >
