@@ -1,10 +1,10 @@
-  .flex {
+  .CustomInputNumberRoot {
       display: inline-flex;
       flex-direction: row;
       padding: 4px;
   }
 
-  .item {
+  .CustomInputNumberItem {
       flex: 1;
       width: 46px;
       height: 46px;
@@ -17,8 +17,8 @@
       border-radius: 5px;
   }
 
-  .content {
-      @extend .item;
+  .CustomInputNumberContent {
+      @extend .CustomInputNumberItem;
       border-color: DarkGrey;
       color: Grey;
       font-size: 16px;
@@ -26,8 +26,8 @@
       padding: 0px;
   }
 
-  .btn {
-      @extend .item;
+  .CustomInputNumberBtn {
+      @extend .CustomInputNumberItem;
       border-color: #87CEEB;
       font-size: 48px;
       color: #87CEEB;
@@ -41,13 +41,13 @@
   }
 
   /* Works for Chrome, Safari, Edge, Opera */
-  .content::-webkit-outer-spin-button,
-  .content::-webkit-inner-spin-button {
+  .CustomInputNumberContent::-webkit-outer-spin-button,
+  .CustomInputNumberContent::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
   }
 
   /* Works for Firefox */
-  .content[type="number"] {
+  .CustomInputNumberContent[type="number"] {
       -moz-appearance: textfield;
   }

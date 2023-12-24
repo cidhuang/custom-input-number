@@ -104,13 +104,13 @@ const CustomInputNumber = (props) => {
     }
 
     return (
-        <div className="flex" style={{background: props.disabled ? '#dddddd' : 'white'}}>
-            <div className="btn"
+        <div className="CustomInputNumberRoot" style={{background: props.disabled ? '#dddddd' : 'white'}}>
+            <div className="CustomInputNumberBtn"
                 onMouseDown={e => onMouseDownMinus(e)}
             >
                 -
             </div>
-            <input type="number" className="content"
+            <input type="number" className="CustomInputNumberContent"
                 min={props.min}
                 max={props.max}
                 step={props.step}
@@ -121,7 +121,7 @@ const CustomInputNumber = (props) => {
                 onChange={e => onChange(e)}
                 onKeyUp={e => onKeyUp(e)}
             />
-            <div className="btn"
+            <div className="CustomInputNumberBtn"
                 onMouseDown={e => onMouseDownPlus(e)}
             >
                 +
