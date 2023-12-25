@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 const RoomAllocation = ({
     guest,
     room,
-    name = uuidv4(),
+    name,
     onChange = (e) => { }
 }) => {
     const [disabled, setDisabled] = useState(false);
@@ -59,9 +59,7 @@ const RoomAllocation = ({
                 />
                 {
                     (index !== (room - 1)) &&
-                    <div>
-                        ---
-                    </div>
+                    <hr className="RoomAllocationHR" />
                 }
             </div>
         );
@@ -69,7 +67,7 @@ const RoomAllocation = ({
 
     return (
         <div className="RoomAllocation">
-            <div className="RoomAllocationTitle">
+            <div className="c">
                 住客人數：{guest}人 / {room}房
             </div>
             <div className="RoomAllocationGuestLeft">

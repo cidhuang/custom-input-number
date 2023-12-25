@@ -35,7 +35,6 @@ const App = () => {
             <RoomAllocation
                 guest={6}
                 room={3}
-                name="ma"
                 onChange={result => console.log(result)} />
             <hr />
             <div>

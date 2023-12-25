@@ -1,25 +1,31 @@
-  .RoomFlex {
-      display: inline-flex;
-      flex-direction: row;
-      padding: 4px;
-      position: relative;
-  }
+.Room {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
-  .RoomTitle {
+.RoomFlex {
+    display: inline-flex;
+    flex-direction: row;
+    padding: 4px;
+    position: relative;
+}
+
+.RoomTitle {
     font-size: 16px;
-  }
+}
 
-  .RoomAge {
+.RoomAge {
     color: gray;
-  }
+}
 
-  .RoomLabel {
+.RoomLabel {
     font-size: 14px;
     position: absolute;
     top: 50%;
     -ms-transform: translateY(-50%);
-    transform: translateY(-50%);  }
+    transform: translateY(-50%);
+}
 
-  .RoomInput {
+.RoomInput {
     margin-left: 100px;
-  }
+}
