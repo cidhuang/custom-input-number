@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 const RoomAllocation = ({
     guest,
     room,
-    name,
+    name = uuidv4(),
     onChange = (e) => { }
 }) => {
     const [disabled, setDisabled] = useState(false);
@@ -40,7 +40,7 @@ const RoomAllocation = ({
     }, [guest, room]);
 
     function handleRoomChange(index, e) {
-        if(e.adult === result[index].adult && e.child === result[index].child) {
+        if (e.adult === result[index].adult && e.child === result[index].child) {
             return;
         }
 

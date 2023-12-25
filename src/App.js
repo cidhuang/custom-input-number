@@ -2,7 +2,7 @@ import CustomInputNumber from './CustomInputNumber/CustomInputNumber';
 import Room from './Room/Room';
 import RoomAllocation from './RoomAllocation/RoomAllocation';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 const App = () => {
     const [min, setMin] = useState(3);
