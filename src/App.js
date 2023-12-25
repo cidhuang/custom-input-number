@@ -1,4 +1,6 @@
 import CustomInputNumber from './CustomInputNumber/CustomInputNumber';
+import Room from './Room/Room';
+import RoomAllocation from './RoomAllocation/RoomAllocation';
 
 import React, { useEffect, useState, useRef } from 'react';
 
@@ -27,6 +29,25 @@ const App = () => {
 
     return (
         <>
+            <div>
+                <h3>RoomAllocation</h3>
+            </div>
+            <RoomAllocation
+                guest={6}
+                room={3}
+                name="ma"
+                onChange={result => console.log(result)} />
+            <hr />
+            <div>
+                <h3>Room</h3>
+            </div>
+            <Room
+                disabled={false}
+            />
+            <hr />
+            <div>
+                <h3>CustomInputNumber</h3>
+            </div>
             <CustomInputNumber
                 min={value}
                 max={31}
