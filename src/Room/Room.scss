@@ -2,4 +2,24 @@
       display: inline-flex;
       flex-direction: row;
       padding: 4px;
+      position: relative;
+  }
+
+  .RoomTitle {
+    font-size: 16px;
+  }
+
+  .RoomAge {
+    color: gray;
+  }
+
+  .RoomLabel {
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);  }
+
+  .RoomInput {
+    margin-left: 100px;
   }

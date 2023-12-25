@@ -35,35 +35,38 @@ const Room = ({
                 房間：{adult + child}人
             </div>
             <div className="RoomFlex">
-                <div>
-                    大人
-                    <br />
-                    年齡 20+
+                <div className="RoomLabel">
+                    <div>大人</div>
+                    <div className="RoomAge">年齡 20+</div>
                 </div>
-                <CustomInputNumber
-                    min={1}
-                    max={max - child}
-                    step={1}
-                    name={name + "-adult"}
-                    value={adult}
-                    disabled={disabled}
-                    onChange={handleChangeAdult}
-                />
+                <div className="RoomInput">
+                    <CustomInputNumber
+                        min={1}
+                        max={max - child}
+                        step={1}
+                        name={name + "-adult"}
+                        value={adult}
+                        disabled={disabled}
+                        onChange={handleChangeAdult}
+                    />
+                </div>
             </div>
             <div></div>
             <div className="RoomFlex">
-                <div>
+                <div className="RoomLabel">
                     小孩
                 </div>
-                <CustomInputNumber
-                    min={0}
-                    max={max - adult}
-                    step={1}
-                    name={name + "-child"}
-                    value={child}
-                    disabled={disabled}
-                    onChange={handleChangeChild}
-                />
+                <div className="RoomInput">
+                    <CustomInputNumber
+                        min={0}
+                        max={max - adult}
+                        step={1}
+                        name={name + "-child"}
+                        value={child}
+                        disabled={disabled}
+                        onChange={handleChangeChild}
+                    />
+                </div>
             </div>
         </div>
     );
