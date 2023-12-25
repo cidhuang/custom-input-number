@@ -20,10 +20,12 @@ const RoomAllocation = ({
     const [guestLeft, setGuestLeft] = useState(guest);
 
     useEffect(() => {
-        setDisabled(guest == room);
-    }, [guest]);
-
-    useEffect(() => {
+        if (guest < room) {
+            return new Error('There will be empty room.');
+        }
+        if (guest > room * 4) {
+            return new Error('Rooms cannot contain all guests!');
+        }
         setDisabled(guest == room);
         let tmp = [];
         let tmp2 = [];
@@ -35,10 +37,9 @@ const RoomAllocation = ({
         setMaxes(tmp2);
         setGuestLeft(guest - room);
         onChange(tmp);
-    }, [room]);
+    }, [guest, room]);
 
     function handleRoomChange(index, e) {
-        //console.log(e, result[index]);
         if(e.adult === result[index].adult && e.child === result[index].child) {
             return;
         }
