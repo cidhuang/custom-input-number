@@ -1,11 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
+import PropTypes from "prop-types";
 
 import "./CustomInputNumber.scss"
 
 import { setFocus, setDown, setUp } from "./lib"
 
 // react
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 const CustomInputNumber = ({
     min,
@@ -141,6 +142,17 @@ const CustomInputNumber = ({
             </div>
         </div>
     );
+};
+
+CustomInputNumber.propTypes = {
+    min: PropTypes.number,
+    max: PropTypes.number,
+    step: PropTypes.number,
+    name: PropTypes.string,
+    value: PropTypes.number,
+    disabled: PropTypes.bool,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func
 };
 
 export default CustomInputNumber

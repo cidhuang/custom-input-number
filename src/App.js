@@ -29,8 +29,8 @@ const App = () => {
         <>
             <CustomInputNumber
                 min={value}
-                max="31"
-                step="2"
+                max={31}
+                step={2}
                 name="cin"
                 value={5}
                 disabled={false}
