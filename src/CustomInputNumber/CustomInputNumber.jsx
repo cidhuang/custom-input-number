@@ -6,7 +6,7 @@ import "./CustomInputNumber.scss"
 import { setFocus, setDown, setUp } from "./lib"
 
 // react
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const CustomInputNumber = ({
     min,
@@ -23,6 +23,13 @@ const CustomInputNumber = ({
     const [mouseDownPlus, setMouseDownPlus] = useState(false);
     const timeoutIdMinus = useRef(null);
     const timeoutIdPlus = useRef(null);
+
+    useEffect(() => {
+        if (parseFloat(content) != parseFloat(value)) {
+            onChange({ target: { name: name, value: value } });
+            setContent(value);
+        }
+    }, [value]);
 
     function handleKeyUp(e) {
         switch (e.code) {

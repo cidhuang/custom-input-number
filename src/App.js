@@ -5,7 +5,12 @@ import RoomAllocation from './RoomAllocation/RoomAllocation';
 import React, { useEffect, useState, useRef } from 'react';
 
 const App = () => {
-    const [value, setValue] = useState(3);
+    const [min, setMin] = useState(3);
+    const [max, setMax] = useState(33);
+    const [step, setStep] = useState(2);
+    const [name, setName] = useState("CIN");
+    const [value, setValue] = useState(7);
+    const [disabled, setDisabled] = useState(false);
 
     function onChangeCIN(e) {
         console.log("onChangedCIN a", e.target.value, e.target.name, e);
@@ -23,8 +28,28 @@ const App = () => {
         console.log("onBlurTest", e);
     }
 
-    function onClick(e) {
-        setValue(value + 1);
+    function handleChangeMin(e) {
+        setMin(parseFloat(e.target.value));
+    }
+
+    function handleChangeMax(e) {
+        setMax(parseFloat(e.target.value));
+    }
+
+    function handleChangeStep(e) {
+        setStep(parseFloat(e.target.value));
+    }
+
+    function handleChangeName(e) {
+        setName(e.target.value);
+    }
+
+    function handleChangeValue(e) {
+        setValue(parseFloat(e.target.value));
+    }
+
+    function handleChangeDisabled(e) {
+        setDisabled(e.target.checked);
     }
 
     return (
@@ -48,25 +73,68 @@ const App = () => {
                 <h3>CustomInputNumber</h3>
             </div>
             <CustomInputNumber
-                min={value}
-                max={31}
-                step={2}
-                name="cin"
-                value={5}
-                disabled={false}
+                min={min}
+                max={max}
+                step={step}
+                name={name}
+                value={value}
+                disabled={disabled}
                 onChange={onChangeCIN}
                 onBlur={onBlurCIN}
             />
             <div></div>
             <input type="number" name="test"
-                min={value}
-                max="11"
-                step="2"
-                defaultValue={5}
+                min={min}
+                max={max}
+                step={step}
+                value={value}
+                disabled={disabled}
                 onChange={onChangeTest}
                 onBlur={onBlurTest}
-            ></input>
-            <button onClick={onClick}>test</button>
+            />
+            <div></div>
+            <div>
+                min
+                <input type="number"
+                    value={min}
+                    onChange={handleChangeMin}
+                />
+            </div>
+            <div>
+                max
+                <input type="number"
+                    value={max}
+                    onChange={handleChangeMax}
+                />
+            </div>
+            <div>
+                step
+                <input type="number"
+                    value={step}
+                    onChange={handleChangeStep}
+                />
+            </div>
+            <div>
+                name
+                <input type="text"
+                    value={name}
+                    onChange={handleChangeName}
+                />
+            </div>
+            <div>
+                value
+                <input type="number"
+                    value={value}
+                    onChange={handleChangeValue}
+                />
+            </div>
+            <div>
+                disabled
+                <input type="checkbox"
+                    value={disabled}
+                    onChange={handleChangeDisabled}
+                />
+            </div>
         </>
     );
 };
