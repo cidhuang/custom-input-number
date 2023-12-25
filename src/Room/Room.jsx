@@ -12,10 +12,20 @@ const Room = ({
     max = 4,
     name = uuidv4(),
     disabled = false,
+    adult0 = 1,
+    child0 = 0,
     onChange = (e) => { }
 }) => {
-    const [adult, setAdult] = useState(1);
-    const [child, setChild] = useState(0);
+    const [adult, setAdult] = useState(adult0);
+    const [child, setChild] = useState(child0);
+
+    useEffect(() => {
+        setAdult(adult0);
+    }, [adult0]);
+
+    useEffect(() => {
+        setChild(child0);
+    }, [child0]);
 
     useEffect(() => {
         onChange({ name: name, adult: adult, child: child });
@@ -75,6 +85,8 @@ const Room = ({
 Room.propTypes = {
     max: PropTypes.number,
     name: PropTypes.string,
+    adult0: PropTypes.number,
+    child0: PropTypes.number,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
 };

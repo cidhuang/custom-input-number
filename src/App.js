@@ -12,6 +12,9 @@ const App = () => {
     const [value, setValue] = useState(7);
     const [disabled, setDisabled] = useState(false);
 
+    const [guest, setGuest] = useState(10);
+    const [room, setRoom] = useState(3);
+
     function onChangeCIN(e) {
         console.log("onChangedCIN a", e.target.value, e.target.name, e);
     }
@@ -52,14 +55,37 @@ const App = () => {
         setDisabled(e.target.checked);
     }
 
+    function handleChangeGuest(e) {
+        setGuest(parseFloat(e.target.value));
+    }
+
+    function handleChangeRoom(e) {
+        setRoom(parseFloat(e.target.value));
+    }
+
     return (
         <>
+            <div>
+                guest
+                <input type="number"
+                    value={guest}
+                    onChange={handleChangeGuest}
+                />
+            </div>
+            <div>
+                room
+                <input type="number"
+                    value={room}
+                    onChange={handleChangeRoom}
+                />
+            </div>
+            <hr />
             <div>
                 <h3>RoomAllocation</h3>
             </div>
             <RoomAllocation
-                guest={6}
-                room={3}
+                guest={guest}
+                room={room}
                 onChange={result => console.log(result)} />
             <hr />
             <div>
