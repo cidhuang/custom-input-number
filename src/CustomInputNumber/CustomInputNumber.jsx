@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import "./CustomInputNumber.scss"
 
 import { setFocus, setDown, setUp } from "./lib"
@@ -5,20 +7,29 @@ import { setFocus, setDown, setUp } from "./lib"
 // react
 import React, { useEffect, useState, useRef } from 'react';
 
-const CustomInputNumber = (props) => {
-    const [value, setValue] = useState(props.value);
+const CustomInputNumber = ({
+    min,
+    max,
+    step,
+    name = uuidv4(),
+    value,
+    disabled = false,
+    onChange = (e) => { },
+    onBlur = (e) => { }
+}) => {
+    const [content, setContent] = useState(value);
     const [mouseDownMinus, setMouseDownMinus] = useState(false);
     const [mouseDownPlus, setMouseDownPlus] = useState(false);
     const timeoutIdMinus = useRef(null);
     const timeoutIdPlus = useRef(null);
 
-    function onKeyUp(e) {
+    function handleKeyUp(e) {
         switch (e.code) {
             case "ArrowUp":
             case "ArrowDown":
-                if (parseFloat(value) != parseFloat(e.target.value)) {
-                    props.onChange({ target: { name: props.name, value: e.target.value } });
-                    setValue(e.target.value);
+                if (parseFloat(content) != parseFloat(e.target.value)) {
+                    onChange({ target: { name: name, value: e.target.value } });
+                    setContent(e.target.value);
                 }
                 break;
             default:
@@ -26,103 +37,105 @@ const CustomInputNumber = (props) => {
         }
     }
 
-    function onChange(e) {
-        props.onChange({ target: { name: props.name, value: e.target.value } });
-        setValue(e.target.value);
+    function handleChange(e) {
+        onChange({ target: { name: name, value: e.target.value } });
+        setContent(e.target.value);
     }
 
-    function onBlur(e) {
+    function handleBlur(e) {
         if (mouseDownMinus) {
             setMouseDownMinus(false);
-            setFocus(props.name);
+            setFocus(name);
             return;
         }
         if (mouseDownPlus) {
             setMouseDownPlus(false);
-            setFocus(props.name);
+            setFocus(name);
             return;
         }
-        props.onBlur(e);
+        if (onBlur) {
+            onBlur(e);
+        }
     }
 
     function down() {
-        let r = setDown(props.name);
+        let r = setDown(name);
         if (r !== null) {
-            props.onChange({ target: { name: props.name, value: r } });
-            setValue(r);
+            onChange({ target: { name: name, value: r } });
+            setContent(r);
         }
     }
 
     function up() {
-        let r = setUp(props.name);
+        let r = setUp(name);
         if (r !== null) {
-            props.onChange({ target: { name: props.name, value: r } });
-            setValue(r);
+            onChange({ target: { name: name, value: r } });
+            setContent(r);
         }
     }
 
-    function onTimeOutMinus() {
-        timeoutIdMinus.current = window.setTimeout(onTimeOutMinus, 50);
+    function handleTimeOutMinus() {
+        timeoutIdMinus.current = window.setTimeout(handleTimeOutMinus, 50);
         down();
     }
 
-    function onTimeOutPlus() {
-        timeoutIdPlus.current = window.setTimeout(onTimeOutPlus, 50);
+    function handleTimeOutPlus() {
+        timeoutIdPlus.current = window.setTimeout(handleTimeOutPlus, 50);
         up();
     }
 
-    function onMouseUpMinus(e) {
+    function handleMouseUpMinus(e) {
         setMouseDownMinus(false);
         window.clearTimeout(timeoutIdMinus.current);
-        window.removeEventListener('mouseup', onMouseUpMinus, true);
+        window.removeEventListener('mouseup', handleMouseUpMinus, true);
     }
 
-    function onMouseUpPlus(e) {
+    function handleMouseUpPlus(e) {
         setMouseDownPlus(false);
         window.clearTimeout(timeoutIdPlus.current);
-        window.removeEventListener('mouseup', onMouseUpPlus, true);
+        window.removeEventListener('mouseup', handleMouseUpPlus, true);
     }
 
-    function onMouseDownMinus(e) {
-        if(props.disabled) {
+    function handleMouseDownMinus(e) {
+        if (disabled) {
             return;
         }
-        window.addEventListener('mouseup', onMouseUpMinus, true)
-        timeoutIdMinus.current = window.setTimeout(onTimeOutMinus, 500);
+        window.addEventListener('mouseup', handleMouseUpMinus, true)
+        timeoutIdMinus.current = window.setTimeout(handleTimeOutMinus, 500);
         down();
         setMouseDownMinus(true);
     }
 
-    function onMouseDownPlus(e) {
-        if(props.disabled) {
+    function handleMouseDownPlus(e) {
+        if (disabled) {
             return;
         }
-        window.addEventListener('mouseup', onMouseUpPlus, true)
-        timeoutIdPlus.current = window.setTimeout(onTimeOutPlus, 500);
+        window.addEventListener('mouseup', handleMouseUpPlus, true)
+        timeoutIdPlus.current = window.setTimeout(handleTimeOutPlus, 500);
         up();
         setMouseDownPlus(true);
     }
 
     return (
-        <div className="CustomInputNumberRoot" style={{background: props.disabled ? '#dddddd' : 'white'}}>
+        <div className="CustomInputNumberRoot" style={{ background: disabled ? '#dddddd' : 'white' }}>
             <div className="CustomInputNumberBtn"
-                onMouseDown={e => onMouseDownMinus(e)}
+                onMouseDown={e => handleMouseDownMinus(e)}
             >
                 -
             </div>
             <input type="number" className="CustomInputNumberContent"
-                min={props.min}
-                max={props.max}
-                step={props.step}
-                name={props.name}
-                value={value}
-                disabled={props.disabled}
-                onBlur={e => onBlur(e)}
-                onChange={e => onChange(e)}
-                onKeyUp={e => onKeyUp(e)}
+                min={min}
+                max={max}
+                step={step}
+                name={name}
+                value={content}
+                disabled={disabled}
+                onBlur={e => handleBlur(e)}
+                onChange={e => handleChange(e)}
+                onKeyUp={e => handleKeyUp(e)}
             />
             <div className="CustomInputNumberBtn"
-                onMouseDown={e => onMouseDownPlus(e)}
+                onMouseDown={e => handleMouseDownPlus(e)}
             >
                 +
             </div>
