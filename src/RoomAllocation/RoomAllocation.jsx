@@ -14,6 +14,8 @@ const RoomAllocation = ({
     name = uuidv4(),
     onChange = (e) => { }
 }) => {
+    const [guest1, setGuest1] = useState(guest);
+    const [room1, setRoom1] = useState(room);
     const [disabled, setDisabled] = useState(false);
     const [result, setResult] = useState([]);
     const [maxes, setMaxes] = useState([]);
@@ -26,6 +28,8 @@ const RoomAllocation = ({
         if (guest > room * 4) {
             return new Error('Rooms cannot contain all guests!');
         }
+        setGuest1(guest);
+        setRoom1(room);
         setDisabled(guest == room);
         let tmp = [];
         let tmp2 = [];
@@ -47,15 +51,15 @@ const RoomAllocation = ({
         result[index] = { adult: e.adult, child: e.child };
         setResult(result);
 
-        let tmp1 = guest;
-        for (let i = 0; i < room; i++) {
+        let tmp1 = guest1;
+        for (let i = 0; i < room1; i++) {
             tmp1 -= result[i].adult;
             tmp1 -= result[i].child;
         }
         setGuestLeft(tmp1);
 
         let tmp2 = [];
-        for (let i = 0; i < room; i++) {
+        for (let i = 0; i < room1; i++) {
             let total = result[i].adult + result[i].child;
             tmp2.push(Math.min(4, tmp1 + total));
         }
@@ -67,7 +71,7 @@ const RoomAllocation = ({
     return (
         <div className="RoomAllocation">
             <div className="c">
-                住客人數：{guest}人 / {room}房
+                住客人數：{guest1}人 / {room1}房
             </div>
             <div className="RoomAllocationGuestLeft">
                 尚未分配人數：{guestLeft}人
